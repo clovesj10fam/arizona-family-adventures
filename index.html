@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1b0f3f">
+<title>Arizona Family Adventures — Scottsdale, Sept–Oct 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Righteous&family=Nunito:ital,wght@0,400;0,600;0,800;1,400&display=swap');
+  :root{
+    color-scheme: light;
+    --night:#1b0f3f;
+    --indigo:#2a1a6b;
+    --purple:#6c2bd9;
+    --violet:#9b4dff;
+    --blue:#2f7cf6;
+    --sky:#6fb6ff;
+    --pink:#ff3fa4;
+    --hot:#ff2d78;
+    --red:#e8304a;
+    --cream:#fff7fb;
+    --ink:#2a1450;
+    --sub:#7a5c9e;
+    --pink-soft:rgba(255,63,164,.14);
+    --hairline:rgba(255,120,200,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Nunito',-apple-system,Helvetica,Arial,sans-serif;
+    background:linear-gradient(180deg,#120a33 0%,var(--night) 18%,var(--indigo) 38%,var(--purple) 58%,var(--hot) 82%,var(--red) 100%);
+    background-attachment:fixed;
+    color:var(--cream);
+    padding:0 0 calc(46px + env(safe-area-inset-bottom));
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 16px}
+
+  /* ── HERO ── */
+  .hero{position:relative;text-align:center;overflow:hidden;
+    background:linear-gradient(180deg,#0f0730 0%,#2a1a6b 30%,#6c2bd9 55%,#ff3fa4 78%,#e8304a 100%);
+  }
+  .hero .art{display:block;width:100%;height:clamp(400px,58vw,560px);margin:0 auto}
+  .hero .txt{position:absolute;left:0;right:0;top:9%;padding:0 20px;pointer-events:none}
+  .hero .eyebrow{font-family:'Nunito',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;color:var(--sky);margin-bottom:8px;text-shadow:0 0 12px rgba(111,182,255,.6)}
+  .hero h1{
+    font-family:'Righteous',cursive;font-weight:normal;font-size:clamp(2.4rem,9vw,4.6rem);line-height:1;
+    background:linear-gradient(180deg,#fff7fb 0%,#ffd6ec 45%,#ff3fa4 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 3px 0 #6c2bd9) drop-shadow(0 6px 18px rgba(255,45,120,.55));
+    letter-spacing:.02em;
+  }
+  .hero h2{font-family:'Righteous',cursive;font-weight:normal;font-size:clamp(.9rem,3.2vw,1.2rem);letter-spacing:.34em;text-transform:uppercase;color:#fff;margin-top:10px;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+  .hero .dates{font-weight:600;font-style:italic;font-size:.95rem;color:#ffe3f2;margin-top:8px}
+  .hero .place{font-weight:800;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--sky);margin-top:4px}
+
+  /* ── COUNTDOWN ── */
+  .countdown{display:flex;gap:22px;justify-content:center;align-items:baseline;padding:18px 16px 6px}
+  .cd-item{text-align:center;min-width:64px}
+  .cd-num{font-family:'Righteous',cursive;font-size:2.1rem;color:#fff;line-height:1;text-shadow:0 0 14px rgba(255,63,164,.9)}
+  .cd-lbl{font-size:.62rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:var(--sky);margin-top:5px}
+  .cd-sep{color:var(--pink);font-size:1.1rem}
+  .cd-msg{text-align:center;font-style:italic;color:#ffe3f2;padding:10px 0 4px}
+
+  /* ── NAV ── */
+  nav{
+    position:sticky;top:0;z-index:10;display:flex;gap:10px;justify-content:center;
+    background:rgba(27,15,63,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    padding:12px 16px;border-bottom:2px solid var(--pink);
+  }
+  nav button{
+    flex:1;max-width:180px;font-family:'Righteous',cursive;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+    padding:12px 6px;border-radius:999px;border:2px solid var(--violet);background:transparent;color:#fff;cursor:pointer;transition:.2s;
+  }
+  nav button.active{background:linear-gradient(90deg,var(--hot),var(--violet));border-color:transparent;color:#fff;box-shadow:0 0 18px rgba(255,45,120,.6)}
+
+  section{display:none;padding-top:26px}
+  section.show{display:block}
+  .sechead{text-align:center;margin-bottom:6px}
+  .sechead h2{font-family:'Righteous',cursive;font-weight:normal;font-size:1.5rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-shadow:0 0 16px rgba(111,182,255,.7),0 3px 0 var(--purple)}
+  .sechead .sub{font-style:italic;font-size:.95rem;color:#ffe3f2;margin-top:6px}
+
+  /* ── FILTERS ── */
+  .filters{display:flex;gap:9px;overflow-x:auto;padding:16px 2px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .filters::-webkit-scrollbar{display:none}
+  .filters button{
+    flex:0 0 auto;font-family:inherit;font-weight:700;font-size:.86rem;padding:9px 18px;border-radius:999px;
+    border:2px solid rgba(255,255,255,.55);background:rgba(255,255,255,.1);color:#fff;cursor:pointer;white-space:nowrap;
+  }
+  .filters button.active{background:#fff;border-color:#fff;color:var(--hot)}
+
+  /* ── CARDS ── */
+  .grid{display:grid;grid-template-columns:1fr;gap:22px}
+  @media(min-width:560px){.grid{grid-template-columns:1fr 1fr}}
+  .card{
+    position:relative;background:var(--cream);color:var(--ink);
+    border:3px solid var(--pink);border-radius:18px;
+    box-shadow:0 8px 0 var(--purple),0 14px 30px rgba(20,5,60,.45);
+    padding:26px 18px 18px;display:flex;flex-direction:column;gap:10px;
+  }
+  .card .fleuron{
+    position:absolute;top:-18px;left:50%;transform:translateX(-50%);
+    background:linear-gradient(135deg,var(--hot),var(--violet));color:#fff;
+    font-size:1.1rem;line-height:1;padding:6px 14px;border:3px solid var(--cream);border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.25);
+  }
+  .card.starred{border-color:var(--sky);box-shadow:0 8px 0 var(--blue),0 0 0 3px rgba(111,182,255,.35),0 14px 34px rgba(47,124,246,.45)}
+  .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .card h4{font-family:'Righteous',cursive;font-weight:normal;font-size:1.22rem;color:var(--purple);line-height:1.15}
+  .price{color:var(--hot);font-weight:800;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:.64rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:var(--pink-soft);color:var(--hot);padding:4px 11px;border-radius:999px}
+  .tag.area{background:rgba(47,124,246,.14);color:var(--blue)}
+  .desc{font-size:.93rem;line-height:1.6;color:#4a3570}
+  .near{font-size:.8rem;font-weight:600;color:var(--blue);font-style:italic}
+  .contact{font-size:.84rem;line-height:1.7;color:#4a3570}
+  .contact a{color:var(--hot);font-weight:700;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
+  .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:12px;border-top:2px dashed rgba(108,43,217,.25)}
+  .links a{
+    font-family:'Righteous',cursive;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+    padding:10px 16px;border-radius:999px;border:2px solid var(--violet);color:var(--purple);
+  }
+  .links a.primary{background:linear-gradient(90deg,var(--hot),var(--violet));border-color:transparent;color:#fff}
+
+  /* ── PANELS ── */
+  .panel{
+    position:relative;background:var(--cream);color:var(--ink);
+    border:3px solid var(--pink);border-radius:18px;
+    box-shadow:0 8px 0 var(--purple),0 14px 30px rgba(20,5,60,.45);
+    padding:28px 20px 20px;margin:26px 0;
+  }
+  .panel .fleuron{position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--hot),var(--violet));color:#fff;font-size:1rem;line-height:1;padding:5px 16px;border:3px solid var(--cream);border-radius:999px}
+  .panel h3{text-align:center;font-family:'Righteous',cursive;font-weight:normal;font-size:1rem;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:14px}
+  .panel p,.panel li{font-size:.95rem;line-height:1.7;color:#4a3570}
+  .panel strong{color:var(--hot)}
+  .panel ul{list-style:none}
+  .panel li{padding:10px 0;border-bottom:2px dashed rgba(108,43,217,.18)}
+  .panel li:last-child{border-bottom:none;padding-bottom:0}
+  .panel li:first-child{padding-top:0}
+  .note{font-size:.86rem;color:#ffe3f2;font-style:italic;margin-top:10px}
+  .panel .note{color:var(--sub)}
+
+  footer{text-align:center;margin-top:44px;color:#ffe3f2}
+  footer .script{font-family:'Righteous',cursive;font-size:1.6rem;color:#fff;margin:10px 0 6px;text-shadow:0 0 16px rgba(111,182,255,.8)}
+  footer .tiny{font-size:.8rem;font-style:italic;color:rgba(255,247,251,.75)}
+  footer .cactus{font-size:1.6rem;letter-spacing:.4em}
+
+  /* ── CENTERED LAYOUT ── */
+  .filters{justify-content:center;flex-wrap:wrap;overflow:visible}
+  .card,.panel{text-align:center;align-items:center}
+  .top{flex-direction:column;align-items:center;gap:4px}
+  .tags,.links{justify-content:center}
+  .links{width:100%}
+  .panel ul{display:inline-block;text-align:center}
+  .note{text-align:center}
+  .grid{justify-items:stretch}
+  nav a.dine{flex:1;max-width:180px;display:flex;align-items:center;justify-content:center;font-family:'Righteous',cursive;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;padding:12px 6px;border-radius:999px;border:2px solid var(--sky);background:linear-gradient(90deg,#1f6fd6,#17a86b);color:#fff;text-decoration:none;box-shadow:0 0 18px rgba(47,210,127,.55)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <svg class="art" viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+    <defs>
+      <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffd0e6"/><stop offset=".45" stop-color="#ff3fa4"/><stop offset="1" stop-color="#e8304a"/>
+      </linearGradient>
+      <linearGradient id="mtnBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6c2bd9"/><stop offset="1" stop-color="#3b1e8a"/></linearGradient>
+      <linearGradient id="mtnMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b1e8a"/><stop offset="1" stop-color="#2a1a6b"/></linearGradient>
+      <linearGradient id="mtnFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22114f"/><stop offset="1" stop-color="#120a33"/></linearGradient>
+      <mask id="sunStripes">
+        <rect width="900" height="560" fill="#fff"/>
+        <rect x="200" y="322" width="500" height="9" fill="#000"/>
+        <rect x="200" y="343" width="500" height="12" fill="#000"/>
+        <rect x="200" y="367" width="500" height="15" fill="#000"/>
+        <rect x="200" y="395" width="500" height="18" fill="#000"/>
+      </mask>
+      <radialGradient id="glow" cx="50%" cy="60%" r="50%"><stop offset="0" stop-color="#ff3fa4" stop-opacity=".55"/><stop offset="1" stop-color="#ff3fa4" stop-opacity="0"/></radialGradient>
+    </defs>
+    <!-- stars -->
+    <g fill="#fff" opacity=".8">
+      <circle cx="60" cy="40" r="1.6"/><circle cx="140" cy="90" r="1.2"/><circle cx="230" cy="30" r="1.8"/><circle cx="330" cy="70" r="1.1"/>
+      <circle cx="520" cy="35" r="1.5"/><circle cx="640" cy="80" r="1.3"/><circle cx="760" cy="28" r="1.9"/><circle cx="840" cy="95" r="1.2"/>
+      <circle cx="90" cy="150" r="1.1"/><circle cx="800" cy="160" r="1.4"/><circle cx="410" cy="120" r="1"/><circle cx="700" cy="140" r="1.1"/>
+    </g>
+    <!-- glow + sun -->
+    <ellipse cx="450" cy="380" rx="330" ry="200" fill="url(#glow)"/>
+    <circle cx="450" cy="392" r="170" fill="url(#sun)" mask="url(#sunStripes)"/>
+    <!-- back range -->
+    <path fill="url(#mtnBack)" d="M0 470 L60 430 L120 452 L190 400 L250 438 L310 405 L370 445 L420 420 L470 450 L540 395 L600 440 L660 410 L720 448 L790 415 L850 445 L900 425 L900 560 L0 560Z"/>
+    <!-- mid range -->
+    <path fill="url(#mtnMid)" d="M0 505 L70 480 L130 498 L200 462 L260 492 L330 470 L400 500 L460 478 L520 505 L590 468 L650 496 L720 475 L790 502 L860 480 L900 495 L900 560 L0 560Z"/>
+    <!-- front mesa + saguaros -->
+    <path fill="url(#mtnFront)" d="M0 560 L0 528 L120 528 L140 512 L300 512 L318 528 L520 528 L540 510 L690 510 L708 528 L900 528 L900 560Z"/>
+    <g fill="#120a33">
+      <path d="M150 528 V462 a8 8 0 0 1 16 0 V528Z"/><path d="M132 528 V486 a5 5 0 0 1 10 0 V500 H150 V510 H142 V528Z"/><path d="M166 528 V494 a5 5 0 0 1 10 0 V528Z M166 502 H172 V512 H166Z"/>
+      <path d="M745 528 V452 a9 9 0 0 1 18 0 V528Z"/><path d="M722 528 V480 a5 5 0 0 1 10 0 V496 H745 V506 H732 V528Z"/><path d="M763 528 V488 a5 5 0 0 1 10 0 V500 H765 V510 H773 V528Z"/>
+      <path d="M560 528 V478 a7 7 0 0 1 14 0 V528Z"/><path d="M548 528 V500 a4 4 0 0 1 8 0 V508 H560 V516 H556 V528Z"/>
+      <path d="M40 528 V496 a6 6 0 0 1 12 0 V528Z"/>
+    </g>
+    <!-- horizon glow line -->
+    <rect x="0" y="526" width="900" height="3" fill="#6fb6ff" opacity=".7"/>
+  </svg>
+  <div class="txt">
+    <div class="eyebrow">Family Vacation</div>
+    <h1>Arizona<br>Adventures</h1>
+    <h2>Scottsdale · Arizona</h2>
+    <div class="dates">September the 23rd — October the 3rd, 2026</div>
+    <div class="place"><span id="countLbl">Twenty-Six</span> Things To Do · Ages 2 to 19</div>
+  </div>
+</div>
+
+<div class="countdown" id="countdown">
+  <div class="cd-item"><div class="cd-num" id="cd-d">–</div><div class="cd-lbl">Days</div></div>
+  <div class="cd-sep">✦</div>
+  <div class="cd-item"><div class="cd-num" id="cd-h">–</div><div class="cd-lbl">Hours</div></div>
+  <div class="cd-sep">✦</div>
+  <div class="cd-item"><div class="cd-num" id="cd-m">–</div><div class="cd-lbl">Minutes</div></div>
+</div>
+<div class="cd-msg" id="cd-msg" style="display:none">✦ The adventure has begun ✦</div>
+
+<nav>
+  <button class="active" data-tab="do">Things To Do</button>
+  <button data-tab="ages">By Age</button>
+  <button data-tab="tips">Tips</button>
+  <a class="dine" href="dining.html">🍽 Where To Eat</a>
+</nav>
+
+<div class="wrap">
+
+<!-- ═══════════ THINGS TO DO ═══════════ -->
+<section id="do" class="show">
+  <div class="sechead">
+    <h2>To See &amp; Do</h2>
+    <div class="sub">animals, adventures &amp; a little Old West</div>
+  </div>
+
+  <div class="filters" id="doFilters">
+    <button class="active" data-f="all">All</button>
+    <button data-f="animals">Animals</button>
+    <button data-f="outdoors">Outdoors &amp; Adventure</button>
+    <button data-f="play">Rides &amp; Indoor Fun</button>
+    <button data-f="littles">Great for Littles</button>
+    <button data-f="teens">Teen Favorites</button>
+  </div>
+
+  <div class="grid" id="doGrid"></div>
+  <div class="note" style="text-align:center;margin-top:18px">★ Blue-glow cards = the ones that work for every age at once.</div>
+</section>
+
+<!-- ═══════════ BY AGE ═══════════ -->
+<section id="ages">
+  <div class="sechead">
+    <h2>By Age</h2>
+    <div class="sub">who will love what</div>
+  </div>
+
+  <div class="panel">
+    <div class="fleuron">✦</div>
+    <h3>Toddlers &amp; Little Ones · 2–6</h3>
+    <ul>
+      <li><strong>Enchanted Island</strong> — rides built for exactly this age.</li>
+      <li><strong>Medieval Times</strong> — horses, knights, and eating with your hands.</li>
+      <li><strong>Musical Instrument Museum</strong> — bang on everything in the Experience Gallery.</li>
+      <li><strong>Children's Museum of Phoenix</strong> — burn energy indoors.</li>
+      <li><strong>Butterfly Wonderland</strong> — calm, cool, and magical.</li>
+      <li><strong>Phoenix Zoo</strong> — splash pad, carousel, petting area.</li>
+      <li><strong>MacDonald's Ranch</strong> — pony rides, petting zoo, pumpkin patch.</li>
+      <li><strong>Desert Belle</strong> — a boat ride with no walking required.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <div class="fleuron">✦</div>
+    <h3>Kids · 7–12</h3>
+    <ul>
+      <li><strong>Golfland Sunsplash</strong> — batting cages, mini golf, karts.</li>
+      <li><strong>iFLY</strong> — indoor skydiving, no experience needed.</li>
+      <li><strong>Slide Rock</strong> — a natural water slide in Sedona.</li>
+      <li><strong>Arizona Science Center</strong> — hands-on everything.</li>
+      <li><strong>OdySea Aquarium</strong> — touch tanks and the rotating theater.</li>
+      <li><strong>Out of Africa</strong> — Tiger Splash and the safari tram.</li>
+      <li><strong>Papago Park</strong> — a "real" hike they can finish.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <div class="fleuron">✦</div>
+    <h3>Teens · 13–19</h3>
+    <ul>
+      <li><strong>Predator Zip Line</strong> at Out of Africa — over the lions.</li>
+      <li><strong>Octane Raceway</strong> — 45-mph karts, VR, axe throwing.</li>
+      <li><strong>Hot Air Expeditions</strong> — sunrise balloon over the desert.</li>
+      <li><strong>Kayaking the Salt River</strong> — wild horses along the bank.</li>
+      <li><strong>Horseback at MacDonald's Ranch</strong> — sunset desert ride.</li>
+      <li><strong>Arizona Zipline Adventures</strong> — five lines over high desert near Tucson.</li>
+      <li><strong>Camelback Mountain</strong> — the sunrise scramble.</li>
+      <li><strong>Topgolf &amp; Golfland</strong> — friendly competition after dark.</li>
+      <li><strong>Mavericks Hat Bar</strong> — design a custom cowboy hat in Old Town.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════ TIPS ═══════════ -->
+<section id="tips">
+  <div class="sechead">
+    <h2>Good To Know</h2>
+    <div class="sub">a few notes before you go</div>
+  </div>
+
+  <div class="panel">
+    <div class="fleuron">✦</div>
+    <h3>Pairings That Save a Drive</h3>
+    <ul>
+      <li><strong>Papago Park day:</strong> Phoenix Zoo right at 8am opening → lunch and a pool break → Desert Botanical Garden and Hole-in-the-Rock at sunset. All within a mile of each other.</li>
+      <li><strong>Boardwalk day:</strong> OdySea Aquarium + Butterfly Wonderland share a parking lot; Octane Raceway is 5 minutes away.</li>
+      <li><strong>Lake day:</strong> Morning kayaks at Saguaro Lake Guest Ranch, lunch at the marina, afternoon Desert Belle cruise.</li>
+      <li><strong>Downtown day:</strong> Children's Museum for the littles, Science Center for the older kids — across the street from each other.</li>
+      <li><strong>Camp Verde day:</strong> Out of Africa in the morning, Montezuma Castle on the way back — they're ten minutes apart.</li>
+      <li><strong>Sedona day:</strong> Slide Rock early (before the lot fills), Pink Jeep tour mid-afternoon, dinner in Uptown Sedona. ~2 hrs each way.</li>
+      <li><strong>Old Town afternoon:</strong> Mavericks Hat Bar, then the free Old Town trolley, ice cream, and dinner on 5th Ave.</li>
+      <li><strong>Talking Stick night:</strong> iFLY, Octane Raceway, Topgolf, and Medieval Times are all within a mile of each other — split the group by age and meet for dinner.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <div class="fleuron">✦</div>
+    <h3>Late-September Weather</h3>
+    <p>Still warm — expect highs in the mid-90s, sometimes pushing 100°F, with pleasant mornings and evenings in the 70s. Do outdoor things (zoo, ranch, hikes, lake) before 11am or after 4pm, and save the aquarium, museums, and Octane for the hot middle of the day. Camp Verde runs about 10° cooler than the Valley.</p>
+    <div class="note">Sunscreen, hats, and a water bottle for everyone, every day. Heat sneaks up on kids fast.</div>
+  </div>
+
+  <div class="panel">
+    <div class="fleuron">✦</div>
+    <h3>Book Ahead</h3>
+    <p style="text-align:center;margin-bottom:12px"><a href="dining.html" style="color:var(--hot);font-weight:800">See the Dining Guide →</a> for thirty restaurants, sorted for a family of twelve.</p>
+    <ul>
+      <li><strong>Hot Air Expeditions</strong> — weeks ahead; flights fill in fall.</li>
+      <li><strong>Desert Belle</strong> — weekend cruises sell out.</li>
+      <li><strong>Predator Zip Line</strong> — separate reservation from park admission.</li>
+      <li><strong>MacDonald's Ranch rides</strong> — call to hold saddles for a group of 12.</li>
+      <li><strong>OdySea</strong> — timed entry; buy online to skip the line.</li>
+      <li><strong>Pink Jeep Tours &amp; iFLY</strong> — both sell by time slot; book a week out.</li>
+      <li><strong>Topgolf &amp; Medieval Times</strong> — reserve for a party of 12.</li>
+      <li><strong>Home Run Dugout</strong> — a "Topgolf for baseball" with 30 soft-toss batting bays is being built next to Topgolf Scottsdale; check whether it's open by your trip.</li>
+    </ul>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="cactus">🌵 🌄 🌵</div>
+  <div class="script">See you in the desert</div>
+  <div class="tiny">Tap "Map" on any card for directions · "Call" dials from your phone</div>
+</footer>
+
+<script src="data/activities.js"></script>
+<script>
+  const q=x=>encodeURIComponent(x);
+  document.getElementById('doGrid').innerHTML = ACTIVITIES.map(a=>{
+    const tel=a.phone.replace(/\D/g,'').slice(0,10);
+    return `<div class="card${a.star?' starred':''}" data-f="${a.cats.join(' ')}">
+      <div class="fleuron">${a.icon}</div>
+      <div class="top"><h4>${a.name}</h4><div class="price">${a.age}</div></div>
+      <div class="tags"><span class="tag area">${a.area}</span>${a.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="desc">${a.desc}</div>
+      <div class="near">${a.near}</div>
+      <div class="contact">${a.addr}<br>☎ <a href="tel:${tel}">${a.phone}</a></div>
+      <div class="links">
+        <a class="primary" href="https://www.google.com/maps/search/?api=1&query=${q(a.name+', '+a.addr)}" target="_blank">Map</a>
+        <a href="${a.site}" target="_blank">Site</a>
+        <a href="tel:${tel}">Call</a>
+      </div>
+    </div>`;}).join('');
+</script>
+<script>
+  // Tabs
+  document.querySelectorAll('nav button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      document.querySelectorAll('section').forEach(s=>s.classList.remove('show'));
+      document.getElementById(b.dataset.tab).classList.add('show');
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+  // Filters
+  document.querySelectorAll('#doFilters button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('#doFilters button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      const f=b.dataset.f;
+      document.querySelectorAll('#doGrid .card').forEach(c=>{
+        c.style.display=(f==='all'||c.dataset.f.split(' ').includes(f))?'':'none';
+      });
+    });
+  });
+  // Countdown to Oct 22, 2026 (Arizona time, UTC-7)
+  const target=new Date('2026-09-23T07:00:00-07:00');
+  function tick(){
+    const d=target-new Date();
+    if(d<=0){document.getElementById('countdown').style.display='none';document.getElementById('cd-msg').style.display='block';return;}
+    document.getElementById('cd-d').textContent=Math.floor(d/864e5);
+    document.getElementById('cd-h').textContent=Math.floor(d%864e5/36e5);
+    document.getElementById('cd-m').textContent=Math.floor(d%36e5/6e4);
+  }
+  tick();setInterval(tick,30000);
+</script>
+</body>
+</html>

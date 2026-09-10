@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#06203a">
+<title>Where To Eat — Scottsdale, Sept–Oct 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Righteous&family=Nunito:ital,wght@0,400;0,600;0,800;1,400&display=swap');
+  :root{
+    color-scheme: light;
+    --night:#06203a;
+    --indigo:#0b3a5c;
+    --purple:#0e7a7a;
+    --violet:#22c1a3;
+    --blue:#1f6fd6;
+    --sky:#9be7ff;
+    --pink:#2fd27f;
+    --hot:#17a86b;
+    --red:#a8e65c;
+    --cream:#f4fffb;
+    --ink:#0b2e3d;
+    --sub:#4c7d8a;
+    --pink-soft:rgba(23,168,107,.14);
+    --hairline:rgba(47,210,127,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Nunito',-apple-system,Helvetica,Arial,sans-serif;
+    background:linear-gradient(180deg,#041526 0%,var(--night) 18%,var(--indigo) 38%,var(--purple) 58%,var(--hot) 82%,var(--red) 100%);
+    background-attachment:fixed;
+    color:var(--cream);
+    padding:0 0 calc(46px + env(safe-area-inset-bottom));
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 16px}
+
+  /* ── HERO ── */
+  .hero{position:relative;text-align:center;overflow:hidden;
+    background:linear-gradient(180deg,#041526 0%,#0b3a5c 30%,#0e7a7a 55%,#2fd27f 78%,#a8e65c 100%);
+  }
+  .hero .art{display:block;width:100%;height:clamp(400px,58vw,560px);margin:0 auto}
+  .hero .txt{position:absolute;left:0;right:0;top:9%;padding:0 20px;pointer-events:none}
+  .hero .eyebrow{font-family:'Nunito',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;color:var(--sky);margin-bottom:8px;text-shadow:0 0 12px rgba(155,231,255,.6)}
+  .hero h1{
+    font-family:'Righteous',cursive;font-weight:normal;font-size:clamp(2.4rem,9vw,4.6rem);line-height:1;
+    background:linear-gradient(180deg,#f4fffb 0%,#c9fff0 45%,#2fd27f 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 3px 0 #0e7a7a) drop-shadow(0 6px 18px rgba(23,168,107,.55));
+    letter-spacing:.02em;
+  }
+  .hero h2{font-family:'Righteous',cursive;font-weight:normal;font-size:clamp(.9rem,3.2vw,1.2rem);letter-spacing:.34em;text-transform:uppercase;color:#fff;margin-top:10px;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+  .hero .dates{font-weight:600;font-style:italic;font-size:.95rem;color:#d8fff1;margin-top:8px}
+  .hero .place{font-weight:800;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--sky);margin-top:4px}
+
+  /* ── COUNTDOWN ── */
+  .countdown{display:flex;gap:22px;justify-content:center;align-items:baseline;padding:18px 16px 6px}
+  .cd-item{text-align:center;min-width:64px}
+  .cd-num{font-family:'Righteous',cursive;font-size:2.1rem;color:#fff;line-height:1;text-shadow:0 0 14px rgba(47,210,127,.9)}
+  .cd-lbl{font-size:.62rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:var(--sky);margin-top:5px}
+  .cd-sep{color:var(--pink);font-size:1.1rem}
+  .cd-msg{text-align:center;font-style:italic;color:#d8fff1;padding:10px 0 4px}
+
+  /* ── NAV ── */
+  nav{
+    position:sticky;top:0;z-index:10;display:flex;gap:10px;justify-content:center;
+    background:rgba(6,32,58,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    padding:12px 16px;border-bottom:2px solid var(--pink);
+  }
+  nav button{
+    flex:1;max-width:180px;font-family:'Righteous',cursive;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+    padding:12px 6px;border-radius:999px;border:2px solid var(--violet);background:transparent;color:#fff;cursor:pointer;transition:.2s;
+  }
+  nav button.active{background:linear-gradient(90deg,var(--hot),var(--violet));border-color:transparent;color:#fff;box-shadow:0 0 18px rgba(23,168,107,.6)}
+
+  section{display:none;padding-top:26px}
+  section.show{display:block}
+  .sechead{text-align:center;margin-bottom:6px}
+  .sechead h2{font-family:'Righteous',cursive;font-weight:normal;font-size:1.5rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-shadow:0 0 16px rgba(155,231,255,.7),0 3px 0 var(--purple)}
+  .sechead .sub{font-style:italic;font-size:.95rem;color:#d8fff1;margin-top:6px}
+
+  /* ── FILTERS ── */
+  .filters{display:flex;gap:9px;overflow-x:auto;padding:16px 2px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .filters::-webkit-scrollbar{display:none}
+  .filters button{
+    flex:0 0 auto;font-family:inherit;font-weight:700;font-size:.86rem;padding:9px 18px;border-radius:999px;
+    border:2px solid rgba(255,255,255,.55);background:rgba(255,255,255,.1);color:#fff;cursor:pointer;white-space:nowrap;
+  }
+  .filters button.active{background:#fff;border-color:#fff;color:var(--hot)}
+
+  /* ── CARDS ── */
+  .grid{display:grid;grid-template-columns:1fr;gap:22px}
+  @media(min-width:560px){.grid{grid-template-columns:1fr 1fr}}
+  .card{
+    position:relative;background:var(--cream);color:var(--ink);
+    border:3px solid var(--pink);border-radius:18px;
+    box-shadow:0 8px 0 var(--purple),0 14px 30px rgba(2,25,40,.45);
+    padding:26px 18px 18px;display:flex;flex-direction:column;gap:10px;
+  }
+  .card .fleuron{
+    position:absolute;top:-18px;left:50%;transform:translateX(-50%);
+    background:linear-gradient(135deg,var(--hot),var(--violet));color:#fff;
+    font-size:1.1rem;line-height:1;padding:6px 14px;border:3px solid var(--cream);border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.25);
+  }
+  .card.starred{border-color:var(--sky);box-shadow:0 8px 0 var(--blue),0 0 0 3px rgba(155,231,255,.35),0 14px 34px rgba(31,111,214,.45)}
+  .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .card h4{font-family:'Righteous',cursive;font-weight:normal;font-size:1.22rem;color:var(--purple);line-height:1.15}
+  .price{color:var(--hot);font-weight:800;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:.64rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:var(--pink-soft);color:var(--hot);padding:4px 11px;border-radius:999px}
+  .tag.area{background:rgba(31,111,214,.14);color:var(--blue)}
+  .desc{font-size:.93rem;line-height:1.6;color:#1f4a5a}
+  .near{font-size:.8rem;font-weight:600;color:var(--blue);font-style:italic}
+  .contact{font-size:.84rem;line-height:1.7;color:#1f4a5a}
+  .contact a{color:var(--hot);font-weight:700;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
+  .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:12px;border-top:2px dashed rgba(14,122,122,.25)}
+  .links a{
+    font-family:'Righteous',cursive;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+    padding:10px 16px;border-radius:999px;border:2px solid var(--violet);color:var(--purple);
+  }
+  .links a.primary{background:linear-gradient(90deg,var(--hot),var(--violet));border-color:transparent;color:#fff}
+
+  /* ── PANELS ── */
+  .panel{
+    position:relative;background:var(--cream);color:var(--ink);
+    border:3px solid var(--pink);border-radius:18px;
+    box-shadow:0 8px 0 var(--purple),0 14px 30px rgba(2,25,40,.45);
+    padding:28px 20px 20px;margin:26px 0;
+  }
+  .panel .fleuron{position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--hot),var(--violet));color:#fff;font-size:1rem;line-height:1;padding:5px 16px;border:3px solid var(--cream);border-radius:999px}
+  .panel h3{text-align:center;font-family:'Righteous',cursive;font-weight:normal;font-size:1rem;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:14px}
+  .panel p,.panel li{font-size:.95rem;line-height:1.7;color:#1f4a5a}
+  .panel strong{color:var(--hot)}
+  .panel ul{list-style:none}
+  .panel li{padding:10px 0;border-bottom:2px dashed rgba(14,122,122,.18)}
+  .panel li:last-child{border-bottom:none;padding-bottom:0}
+  .panel li:first-child{padding-top:0}
+  .note{font-size:.86rem;color:#d8fff1;font-style:italic;margin-top:10px}
+  .panel .note{color:var(--sub)}
+
+  footer{text-align:center;margin-top:44px;color:#d8fff1}
+  footer .script{font-family:'Righteous',cursive;font-size:1.6rem;color:#fff;margin:10px 0 6px;text-shadow:0 0 16px rgba(155,231,255,.8)}
+  footer .tiny{font-size:.8rem;font-style:italic;color:rgba(244,255,251,.75)}
+  footer .cactus{font-size:1.6rem;letter-spacing:.4em}
+
+  /* ── CENTERED LAYOUT ── */
+  .filters{justify-content:center;flex-wrap:wrap;overflow:visible}
+  .card,.panel{text-align:center;align-items:center}
+  .top{flex-direction:column;align-items:center;gap:4px}
+  .tags,.links{justify-content:center}
+  .links{width:100%}
+  .panel ul{display:inline-block;text-align:center}
+  .note{text-align:center}
+  .grid{justify-items:stretch}
+
+  .home{text-align:center;margin:12px auto 0;font-size:.85rem;color:#d8fff1;font-style:italic}
+  .home a{color:#fff;font-weight:700;border-bottom:2px solid var(--pink);text-decoration:none}
+  .legend{text-align:center;font-size:.82rem;font-style:italic;color:#d8fff1;margin:-6px 0 18px}
+  .grouphead{text-align:center;margin:28px 0 24px}
+  .grouphead h3{font-family:'Righteous',cursive;font-weight:normal;font-size:1.1rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 0 14px rgba(47,210,127,.8)}
+  .grouphead .gsub{font-style:italic;font-size:.85rem;color:#d8fff1;margin-top:4px}
+  .hidden{display:none!important}
+  .copyrow{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:2px}
+  .copy{font-family:inherit;font-size:.82rem;font-weight:700;background:var(--pink-soft);color:var(--hot);border:2px dashed rgba(23,168,107,.5);border-radius:999px;padding:5px 12px;cursor:pointer}
+  .copy::after{content:" ⧉";opacity:.7}
+  .copy.done{background:#d8fff1;border-color:var(--hot)}
+  .copy.done::after{content:" ✓"}
+  a.mapchip{display:inline-flex;align-items:center;text-decoration:none;font-size:.82rem;font-weight:700;background:rgba(31,111,214,.12);color:var(--blue);border:2px solid rgba(31,111,214,.35);border-radius:999px;padding:5px 12px}
+  a.mapchip::after{content:" ↗"}
+  nav a.back{flex:0 0 auto;display:flex;align-items:center;font-family:'Righteous',cursive;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;padding:12px 16px;border-radius:999px;border:2px solid var(--violet);color:#fff;text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <svg class="art" viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+    <defs>
+      <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9fff6"/><stop offset=".45" stop-color="#2fd27f"/><stop offset="1" stop-color="#a8e65c"/></linearGradient>
+      <linearGradient id="mtnBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0e7a7a"/><stop offset="1" stop-color="#0b4f63"/></linearGradient>
+      <linearGradient id="mtnMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b4f63"/><stop offset="1" stop-color="#0b3a5c"/></linearGradient>
+      <linearGradient id="mtnFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#062a40"/><stop offset="1" stop-color="#041526"/></linearGradient>
+      <mask id="sunStripes"><rect width="900" height="560" fill="#fff"/><rect x="200" y="322" width="500" height="9" fill="#000"/><rect x="200" y="343" width="500" height="12" fill="#000"/><rect x="200" y="367" width="500" height="15" fill="#000"/><rect x="200" y="395" width="500" height="18" fill="#000"/></mask>
+      <radialGradient id="glow" cx="50%" cy="60%" r="50%"><stop offset="0" stop-color="#2fd27f" stop-opacity=".55"/><stop offset="1" stop-color="#2fd27f" stop-opacity="0"/></radialGradient>
+    </defs>
+    <g fill="#fff" opacity=".8"><circle cx="60" cy="40" r="1.6"/><circle cx="140" cy="90" r="1.2"/><circle cx="230" cy="30" r="1.8"/><circle cx="330" cy="70" r="1.1"/><circle cx="520" cy="35" r="1.5"/><circle cx="640" cy="80" r="1.3"/><circle cx="760" cy="28" r="1.9"/><circle cx="840" cy="95" r="1.2"/><circle cx="90" cy="150" r="1.1"/><circle cx="800" cy="160" r="1.4"/><circle cx="410" cy="120" r="1"/><circle cx="700" cy="140" r="1.1"/></g>
+    <ellipse cx="450" cy="380" rx="330" ry="200" fill="url(#glow)"/>
+    <circle cx="450" cy="392" r="170" fill="url(#sun)" mask="url(#sunStripes)"/>
+    <path fill="url(#mtnBack)" d="M0 470 L60 430 L120 452 L190 400 L250 438 L310 405 L370 445 L420 420 L470 450 L540 395 L600 440 L660 410 L720 448 L790 415 L850 445 L900 425 L900 560 L0 560Z"/>
+    <path fill="url(#mtnMid)" d="M0 505 L70 480 L130 498 L200 462 L260 492 L330 470 L400 500 L460 478 L520 505 L590 468 L650 496 L720 475 L790 502 L860 480 L900 495 L900 560 L0 560Z"/>
+    <path fill="url(#mtnFront)" d="M0 560 L0 528 L120 528 L140 512 L300 512 L318 528 L520 528 L540 510 L690 510 L708 528 L900 528 L900 560Z"/>
+    <g fill="#041526"><path d="M150 528 V462 a8 8 0 0 1 16 0 V528Z"/><path d="M132 528 V486 a5 5 0 0 1 10 0 V500 H150 V510 H142 V528Z"/><path d="M166 528 V494 a5 5 0 0 1 10 0 V528Z M166 502 H172 V512 H166Z"/><path d="M745 528 V452 a9 9 0 0 1 18 0 V528Z"/><path d="M722 528 V480 a5 5 0 0 1 10 0 V496 H745 V506 H732 V528Z"/><path d="M763 528 V488 a5 5 0 0 1 10 0 V500 H765 V510 H773 V528Z"/><path d="M560 528 V478 a7 7 0 0 1 14 0 V528Z"/><path d="M548 528 V500 a4 4 0 0 1 8 0 V508 H560 V516 H556 V528Z"/><path d="M40 528 V496 a6 6 0 0 1 12 0 V528Z"/></g>
+    <rect x="0" y="526" width="900" height="3" fill="#9be7ff" opacity=".7"/>
+  </svg>
+  <div class="txt">
+    <div class="eyebrow">Family Vacation</div>
+    <h1>Where<br>To Eat</h1>
+    <h2>Scottsdale · Arizona</h2>
+    <div class="dates">September the 23rd — October the 3rd, 2026</div>
+    <div class="place">Thirty Tables · All Within 45 Minutes</div>
+  </div>
+</div>
+<p class="home">Home base: <a href="https://www.google.com/maps/search/?api=1&query=5821+E+Cactus+Rd%2C+Scottsdale%2C+AZ+85254" target="_blank">5821 E Cactus Rd, Scottsdale</a> · drive times are from the house</p>
+
+<nav>
+  <a class="back" href="index.html">← Things To Do</a>
+  <button class="active" data-f="all">All</button>
+  <button data-f="farm">Farm to Table</button>
+  <button data-f="family">Family of 12</button>
+  <button data-f="best">Best of the Valley</button>
+</nav>
+
+<div class="wrap">
+<section id="dine" class="show">
+  <div class="sechead">
+    <h2>Dining Guide</h2>
+    <div class="sub">three lists, thirty tables</div>
+  </div>
+  <p class="legend">★ Blue-glow cards have handled a table of 12 or more · reservations recommended everywhere for a group this size</p>
+  <div id="dineGrid"></div>
+</section>
+</div>
+
+<footer>
+  <div class="cactus">🌮 🌵 🍕</div>
+  <div class="script">Eat well, y'all</div>
+  <div class="tiny">Tap "Map" for directions from the house · "Call" dials from your phone</div>
+</footer>
+
+<script src="data/restaurants.js"></script>
+<script>
+const HOME = "5821 E Cactus Rd, Scottsdale, AZ 85254";
+const GROUPS = {
+  farm:   { mark:"🥗", title:"Farm to Table",      sub:"fresh, local, and 4.5 stars or better" },
+  family: { mark:"🍕", title:"Family of Twelve",   sub:"big tables, easy menus, easy on the wallet" },
+  best:   { mark:"👑", title:"Best of the Valley", sub:"the tables people fly in for" }
+};
+
+const q = s => encodeURIComponent(s);
+const dirUrl = a => `https://www.google.com/maps/dir/?api=1&origin=${q(HOME)}&destination=${q(a)}`;
+const mapUrl = a => `https://www.google.com/maps/search/?api=1&query=${q(a)}`;
+function card(p){
+  const tel = p.phone ? p.phone.replace(/\D/g,'') : '';
+  return `<div class="card${p.star?' starred':''}" data-g="${p.g}">
+    <div class="fleuron">${p.star ? '★' : GROUPS[p.g].mark}</div>
+    <div class="top"><h4>${p.name}</h4><span class="price">${p.rating}★ · ${p.price}</span></div>
+    <div class="tags"><span class="tag area">${p.area}</span>${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    <p class="desc">${p.desc}</p>
+    <p class="near">${p.near} from the house</p>
+    <div class="copyrow">
+      ${p.phone ? `<button class="copy" data-copy="${p.phone}">☎ ${p.phone}</button>` : ''}
+      <a class="mapchip" href="${mapUrl(p.addr)}" target="_blank" rel="noopener">${p.addr}</a>
+    </div>
+    <div class="links">
+      <a class="primary" href="${p.site}" target="_blank" rel="noopener">Reserve</a>
+      <a href="${dirUrl(p.addr)}" target="_blank" rel="noopener">Map</a>
+      <a href="${p.site}" target="_blank" rel="noopener">Site</a>
+      ${tel ? `<a href="tel:+1${tel}">Call</a>` : ''}
+    </div>
+  </div>`;
+}
+document.getElementById('dineGrid').innerHTML = Object.keys(GROUPS).map(g => `
+  <div class="grouphead" data-g="${g}"><h3>${GROUPS[g].mark} &nbsp;${GROUPS[g].title}</h3><div class="gsub">${GROUPS[g].sub}</div></div>
+  <div class="grid" data-g="${g}">${PLACES.filter(p=>p.g===g).map(card).join('')}</div>`).join('');
+document.querySelector('nav').addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b) return;
+  document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active', x===b));
+  const f = b.dataset.f;
+  document.querySelectorAll('.grouphead, .grid').forEach(el => el.classList.toggle('hidden', f!=='all' && el.dataset.g!==f));
+});
+document.addEventListener('click', e => {
+  const b = e.target.closest('.copy'); if(!b) return;
+  navigator.clipboard?.writeText(b.dataset.copy).then(()=>{ b.classList.add('done'); setTimeout(()=>b.classList.remove('done'),1400); });
+});
+</script>
+</body>
+</html>
